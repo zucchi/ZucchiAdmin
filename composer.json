@@ -19,7 +19,9 @@
         "php": ">=5.3.3",
         "zendframework/zendframework": "dev-master",
         "doctrine/doctrine-module": "dev-master",
-        "zucchi/zucchi": "dev-master"
+        "zucchi/zucchi": "dev-master",
+        "zucchi/bootstrap": "dev-master"
+        
     },
     "autoload": {
         "psr-0": {

@@ -1,1 +1,3 @@
-Dynamic layout management for Zucchi Modules
+Simple interface for administration of Zucchi modules
+
+@todo: complete
