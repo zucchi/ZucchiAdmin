@@ -1,6 +1,6 @@
 {
     "name": "zucchi/admin",
-    "description": "Simple Admin Module for ZF2",
+    "description": "Admin Aggregator for Zucchi ZF2 Modules",
     "type": "library",
     "keywords": [
         "zucchi"
@@ -18,7 +18,6 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "dev-master",
-        "doctrine/doctrine-module": "dev-master",
         "zucchi/zucchi": "dev-master",
         "zucchi/bootstrap": "dev-master"
         
