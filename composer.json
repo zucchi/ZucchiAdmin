@@ -3,7 +3,7 @@
     "description": "Admin Aggregator for Zucchi ZF2 Modules",
     "type": "library",
     "keywords": [
-        "zucchi"
+        "zucchi",
         "admin",
         "zf2"
     ],
