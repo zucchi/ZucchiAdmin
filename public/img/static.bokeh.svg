@@ -1,0 +1,31 @@
+<svg id="svgroot" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:html="http://www.w3.org/1999/xhtml" viewBox="0 0 1280 1024">
+  <filter id="b2" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="2"/>
+  </filter>
+  <filter id="b5" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="5"/>
+  </filter>
+  <filter id="b7" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="7"/>
+  </filter>
+  <filter id="b10" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="10"/>
+  </filter>
+  <g xmlns="http://www.w3.org/2000/svg" id="bg" buffered-rendering="static">
+    <circle cx="721.7419719696045" cy="27.662846326828003" r="140.33901472453707" fill-opacity="0.2" fill="hsl(100,100%,100%)" filter="url(#b7)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="775.3371569514275" cy="787.3998498916626" r="87.67343086335028" fill-opacity="0.2" fill="hsl(100,100%,100%)" filter="url(#b7)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="183.9452788233757" cy="848.8082892894745" r="161.9840587877534" fill-opacity="0.2" fill="hsl(100,100%,100%)" filter="url(#b7)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="894.5004415512085" cy="623.4844346046448" r="79.38501061868523" fill-opacity="0.3" fill="hsl(100,100%,100%)" filter="url(#b5)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="147.37544745206833" cy="1013.3357214927673" r="200.81801192037256" fill-opacity="0.1" fill="hsl(100,100%,100%)" filter="url(#b10)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="457.60515213012695" cy="557.4325168132782" r="53.70516192532657" fill-opacity="0.3" fill="hsl(100,100%,100%)" filter="url(#b5)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="819.9886128306389" cy="311.79630064964294" r="76.9189459330422" fill-opacity="0.3" fill="hsl(100,100%,100%)" filter="url(#b5)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="295.9903144836426" cy="462.1145782470703" r="99.3165292499059" fill-opacity="0.2" fill="hsl(100,100%,100%)" filter="url(#b7)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="783.0142763257027" cy="714.9653425216675" r="70.94005143632148" fill-opacity="0.3" fill="hsl(100,100%,100%)" filter="url(#b5)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="595.267176926136" cy="460.92899537086487" r="19.397607624393775" fill-opacity="0.4" fill="hsl(100,100%,100%)" filter="url(#b2)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="711.6930800676346" cy="586.365320444107" r="29.51319125939089" fill-opacity="0.4" fill="hsl(100,100%,100%)" filter="url(#b2)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="41.16721987724304" cy="300.0637457370758" r="181.49440299922426" fill-opacity="0.1" fill="hsl(100,100%,100%)" filter="url(#b10)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="315.7416498661041" cy="800.122308254242" r="123.93478935255398" fill-opacity="0.2" fill="hsl(100,100%,100%)" filter="url(#b7)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="454.0488865971565" cy="662.1064331531525" r="68.27899419994887" fill-opacity="0.3" fill="hsl(100,100%,100%)" filter="url(#b5)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+    <circle cx="914.0053355693817" cy="676.5642166137695" r="91.32150217783195" fill-opacity="0.2" fill="hsl(100,100%,100%)" filter="url(#b7)" stroke="hsl(100,100%,100%)" stroke-width="2"/>
+  </g>
+</svg>

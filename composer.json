@@ -1,0 +1,32 @@
+{
+    "name": "zucchi/admin",
+    "description": "Simple Admin Module for ZF2",
+    "type": "library",
+    "keywords": [
+        "zucchi"
+        "admin",
+        "zf2"
+    ],
+    "homepage": "https://github.com/zucchi/ZucchiAdmin",
+    "authors" : [{
+        "name": "Matt Cockayne",
+        "email" : "matt@zucchi.co.uk",
+        "homepage" : "http://devincharge.com/"
+    }],
+    "license": "BSD-3-Clause",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "dev-master",
+        "doctrine/doctrine-module": "dev-master",
+        "zucchi/zucchi": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "ZucchiAdmin": "src/"
+        },
+        "classmap": [
+            "./"
+        ]
+    }
+}

@@ -1,0 +1,89 @@
+<svg id="svgroot" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:html="http://www.w3.org/1999/xhtml" viewBox="0 0">
+  <filter id="b2" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="2"/>
+  </filter>
+  <filter id="b5" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="5"/>
+  </filter>
+  <filter id="b7" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="7"/>
+  </filter>
+  <filter id="b10" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="10"/>
+  </filter>
+  <g id="bg" buffered-rendering="static">
+  </g>
+  <script><![CDATA[
+    (function() {
+      function attrs(attrs)
+      {
+        for(var attr in attrs)
+          this.setAttribute(attr, attrs[attr]);
+      }
+      
+      function getFill(x,y,maxx,maxy,normdist)
+      {
+        // return "hsl(" + Math.sqrt((x/maxx)*(x/maxx)+(y/maxy)*(y/maxy))*360 + "," + 50+y/maxy + "%," + 60 + "%)";
+        return "hsl(100,100%,100%)";
+      }
+      
+      function makeCircle(dest)
+      {
+        var root = document.documentElement;
+        var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.constructor.prototype.attr = attrs;
+        var maxwidth = root.viewBox.baseVal.width; // defined viewing area width
+        var maxheight = root.viewBox.baseVal.height; // defined viewing area height
+        var midw = root.viewBox.baseVal.width/2; // vertical center
+        var midh = root.viewBox.baseVal.height/2; // horizontal center
+        var cx = Math.random()*maxwidth; // x co-ord for positioning of center point
+        var cy = Math.random()*maxheight; // y co-ord for positioning of center point
+        
+        // what does this do
+        var r = Math.sqrt((cx-midw)*(cx-midw)+(cy-midh)*(cy-midh))/3.5; // radius
+        var rmax = Math.sqrt(midw*midw + midh*midh); // max radius size
+        var normr = r/rmax; // ????
+
+        var filter = "none";
+        var filterOpacity = 1;
+        if(normr > 0.2) {
+          filter = "url(#b10)";
+          filterOpacity = 0.1;
+        } else if (normr > 0.1) {
+          filter = "url(#b7)";
+          filterOpacity = 0.2;
+        } else if (normr > 0.05) {
+          filter = "url(#b5)";
+          filterOpacity = 0.3;
+        } else {
+          filter = "url(#b2)";
+          filterOpacity = 0.4;
+        }
+        
+        var color = getFill(cx,cy,maxwidth,maxheight,normr);
+        
+        c.attr({
+          cx: cx, 
+          cy: cy,
+          r: r, 
+          "fill-opacity": filterOpacity, 
+          fill: color, 
+          filter: filter,
+          stroke: color,
+          "stroke-width": 2
+        });
+              
+        document.getElementById(dest).appendChild(c);
+
+        // webkit seems fail on "fill:hsl(...)"
+        if (!getComputedStyle(c, null).getPropertyValue("fill"))
+        {
+          c.attr({fill:"currentColor", style: "color:" + color});
+        }
+      }
+    
+      for(var i = 0; i < 15; i++)
+        makeCircle("bg");
+    })();
+  ]]></script>
+</svg>
