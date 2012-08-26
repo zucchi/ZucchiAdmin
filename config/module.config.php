@@ -26,6 +26,7 @@ return array(
                     'route'    => '/admin',
                     'defaults' => array(
                         'controller' => 'zucchi-admin-dashboard',
+                        'action' => 'index',
                     ),
                 ),
                 'priority' => 999999, // high priority to enforce admin urls not easily over-ridden
@@ -33,9 +34,14 @@ return array(
             ),
         ),
     ),
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'ZucchiAdmin' => __DIR__ . '/../view',
+    'translator' => array(
+        'locale' => 'en_GB',
+        'translation_patterns' => array(
+            array(
+                'type'     => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern'  => '%s.mo',
+            ),
         ),
     ),
     'view_manager' => array(

@@ -20,6 +20,7 @@
         "zendframework/zendframework": "dev-master",
         "zucchi/zucchi": "dev-master",
         "zucchi/bootstrap": "dev-master"
+        "zucchi/security": "dev-master"
         
     },
     "autoload": {

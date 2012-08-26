@@ -50,14 +50,14 @@ class AdminListener
     public function attach(SharedEventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(
-            'application',
+            'Zend\Mvc\Application',
             MvcEvent::EVENT_DISPATCH, 
             array($this, 'testAdmin'),
             -9999
         );
         
         $this->listeners[] = $events->attach(
-            'application',
+            'Zend\Mvc\Application',
             MvcEvent::EVENT_RENDER, 
             array($this, 'applyLayout'),
             -9999

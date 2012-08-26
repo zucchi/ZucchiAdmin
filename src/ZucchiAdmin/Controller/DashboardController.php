@@ -1,8 +1,8 @@
 <?php
 /**
- * Zucchi (http://framework.zend.com/)
+ * Zucchi (http://zucchi.co.uk)
  *
- * @link      http://github.com/zucchi/Zucchi for the canonical source repository
+ * @link      http://github.com/zucchi/ZucchiAdmin for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zucchi Limited. (http://zucchi.co.uk)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
@@ -20,5 +20,8 @@ use ZucchiAdmin\Controller\AbstractAdminController;
  */
 class DashboardController extends AbstractAdminController
 {
-
+    public function indexAction()
+    {
+        
+    }
 }

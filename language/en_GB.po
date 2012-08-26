@@ -1,0 +1,32 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZucchiAdmin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-21 13:12+0100\n"
+"PO-Revision-Date: 2012-08-21 13:18+0100\n"
+"Last-Translator: Matt Cockayne <matt@zucchi.co.uk>\n"
+"Language-Team: Zucchi Dev <dev@zucchi.co.uk>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate;_\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED KINGDOM\n"
+"X-Poedit-SearchPath-0: src\n"
+"X-Poedit-SearchPath-1: view\n"
+"X-Poedit-SearchPath-2: config\n"
+
+#: view/zucchi-admin/layout.phtml:5
+msgid "Administration Panel"
+msgstr "Administration Panel"
+
+#: view/zucchi-admin/layout.phtml:26
+msgid "Admin"
+msgstr ""
+
+#: view/zucchi-admin/layout.phtml:48
+msgid "All rights reserved."
+msgstr ""
+

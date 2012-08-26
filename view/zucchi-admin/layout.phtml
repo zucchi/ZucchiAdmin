@@ -12,8 +12,7 @@
                               ->appendFile($this->basePath() . '/_js/zucchi/bootstrap/bootstrap.min.js') ?>
     </head>
     <body>
-<!-- <object id="svg" data="/_img/zucchi/admin/bokeh.svg" type="image/svg+xml"> -->
-        <div class="navbar">
+        <div class="navbar navbar-inverse">
             <div class="navbar-inner">
                 <div class="container">
                     <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -23,7 +22,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <!-- Be sure to leave the brand out there if you want it shown -->
-                    <a class="brand" href="#">Zucchi Admin</a>
+                    <a class="brand" href="#">Zucchi <?=$this->translate('Admin')?></a>
                     
                     <?php echo $this->bootstrapNavbar('zucchiadmin.navigation'); ?>
                     
@@ -37,6 +36,11 @@
                 </div>
             </div>
         </div>
+        <?php if (isset($messages)):?>
+        <div class="container messages">
+            <?=$this->bootstrapAlerts($messages);?>
+        </div>
+        <?php endif;?>
         <div id="admin">
             <div class="container">
                 <?=$this->content?>
