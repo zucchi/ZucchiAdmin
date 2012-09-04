@@ -48,5 +48,17 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+        'strategies' => array(
+            'ViewJsonStrategy',
+        ),
+    ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'crudfilterformrow' => 'ZucchiAdmin\Crud\View\Helper\FilterFormRow',
+            'crudlistsorter' => 'ZucchiAdmin\Crud\View\Helper\ListSorter',
+            'crudactionicon' => 'ZucchiAdmin\Crud\View\Helper\ActionIcon',
+            'crudbulkcheckbox' => 'ZucchiAdmin\Crud\View\Helper\BulkCheckbox',
+            'crudbulkactions' => 'ZucchiAdmin\Crud\View\Helper\BulkActions',
+        ),
     ),
 );

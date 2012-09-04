@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
     <head>
         <meta charset="utf-8">
         <?=$this->headTitle($this->translate('Administration Panel'))->setSeparator(' - ')->setAutoEscape(false) ?>
         <?=$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
         <?=$this->headLink()->appendStylesheet($this->basePath() . '/_css/zucchi/bootstrap/bootstrap.min.css')
                             ->appendStylesheet($this->basePath() . '/_css/zucchi/bootstrap/bootstrap-responsive.min.css')
-                            ->appendStylesheet($this->basePath() . '/_css/zucchi/admin/style.css') ?>
+                            ->appendStylesheet($this->basePath() . '/_css/zucchi/admin/style.css')
+                            ->appendStylesheet($this->basePath() . '/_css/zucchi/admin/jquery-ui-1.8.23.custom.css') ?>
         <?=$this->headScript()->appendFile($this->basePath() . '/_js/zucchi/admin/modernizr.min.js')
-                              ->appendFile($this->basePath() . '/_js/zucchi/admin/jquery-1.8.0.min.js') 
+                              ->appendFile($this->basePath() . '/_js/zucchi/admin/jquery-1.8.0.min.js')
+                              ->appendFile($this->basePath() . '/_js/zucchi/admin/jquery-ui-1.8.23.custom.min.js') 
                               ->appendFile($this->basePath() . '/_js/zucchi/bootstrap/bootstrap.min.js') ?>
     </head>
     <body>
@@ -52,5 +54,7 @@
                 <p>&copy; 2011- <?=date('Y')?> by Zucchi Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
             </div>
         </footer>
+    
+    <?=$this->inlineScript();?>
     </body>
 </html>

@@ -4,6 +4,12 @@ return array(
     'ZucchiAdmin\Module' => __DIR__ . '/Module.php',
     'ZucchiAdmin\Controller\AbstractAdminController' => __DIR__ . '/src/ZucchiAdmin/Controller/AbstractAdminController.php',
     'ZucchiAdmin\Controller\DashboardController' => __DIR__ . '/src/ZucchiAdmin/Controller/DashboardController.php',
+    'ZucchiAdmin\Crud\ControlelrTrait' => __DIR__ . '/src/ZucchiAdmin/Crud/ControllerTrait.php',
+    'ZucchiAdmin\Crud\View\Helper\ActionIcon' => __DIR__ . '/src/ZucchiAdmin/Crud/View/Helper/ActionIcon.php',
+    'ZucchiAdmin\Crud\View\Helper\BulkActions' => __DIR__ . '/src/ZucchiAdmin/Crud/View/Helper/BulkActions.php',
+    'ZucchiAdmin\Crud\View\Helper\BulkCheckbox' => __DIR__ . '/src/ZucchiAdmin/Crud/View/Helper/BulkCheckbox.php',
+    'ZucchiAdmin\Crud\View\Helper\FilterFormRow' => __DIR__ . '/src/ZucchiAdmin/Crud/View/Helper/FilterFormRow.php',
+    'ZucchiAdmin\Crud\View\Helper\ListSorter' => __DIR__ . '/src/ZucchiAdmin/Crud/View/Helper/ListSorter.php',
     'ZucchiAdmin\Event\AdminListener' => __DIR__ . '/src/ZucchiAdmin/Event/AdminListener.php',
     'ZucchiAdmin\Navigation\Service\AdminNavigationFactory' => __DIR__ . '/src/ZucchiAdmin/Navigation/Service/AdminNavigationFactory.php',
 );

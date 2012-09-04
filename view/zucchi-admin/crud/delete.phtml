@@ -1,1 +1,8 @@
-CRUD DELETE
+<header><?=sprintf($this->translate('Delete %1$s'), $label)?></header>
+<div class="gutter">
+    <div class="alert alert-error">
+        <a href="?<?=$queryString?>&confirmed=delete" class="btn btn-danger pull-right"><?=$this->translate('Delete')?></a>
+        <h4><?=$this->translate('Warning!')?></h4> 
+        <p><?=sprintf($this->translate('Are you sure you wish to delete this %1$s'), $label)?></p>
+    </div>
+</div>
