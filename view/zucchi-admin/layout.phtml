@@ -35,6 +35,15 @@
                         </ul>
                         <!-- .nav, .navbar-search, .navbar-form, etc -->
                     </div>
+                    
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a class=" dropdown-toggle" href="#" data-toggle="dropdown"><?=$this->identity()?><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?=$this->url('ZucchiAdmin/query', array('logout' => 'logout'))?>"><?=$this->translate('Logout')?></a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

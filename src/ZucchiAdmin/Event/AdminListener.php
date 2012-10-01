@@ -10,14 +10,10 @@
 namespace ZucchiAdmin\Event;
 
 use Zend\EventManager\Event;
-
-use Zend\EventManager\SharedEventManagerInterface;
-use Zend\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
-use Zend\Navigation\Navigation;
-
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
 use ZucchiAdmin\Controller\AbstractAdminController;
-
 use Zucchi\Debug\Debug;
 
 /**
@@ -27,7 +23,7 @@ use Zucchi\Debug\Debug;
  * @package    ZucchiLayout
  * @subpackage Layout
  */
-class AdminListener
+class AdminListener implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -47,23 +43,29 @@ class AdminListener
      * @param  EventManagerInterface $events
      * @return void
      */
-    public function attach(SharedEventManagerInterface $events)
+    public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(
-            'Zend\Mvc\Application',
-            MvcEvent::EVENT_DISPATCH, 
-            array($this, 'testAdmin'),
-            -9999
-        );
-        
-        $this->listeners[] = $events->attach(
-            'Zend\Mvc\Application',
-            MvcEvent::EVENT_RENDER, 
-            array($this, 'applyLayout'),
-            -9999
+        $this->listeners = array(
+            $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'testAdmin'), -9999),
+            $events->attach(MvcEvent::EVENT_RENDER, array($this, 'applyLayout'), -9999),
         );
     }
     
+    /**
+     * remove listeners from events
+     * @param EventManagerInterface $events
+     */
+    public function detach(EventManagerInterface $events)
+    {
+        array_walk($this->listeners, array($events,'detach'));
+        $this->listeners = array();
+    }
+    
+    /**
+     * test if admin controller is being loaded
+     * 
+     * @param MvcEvent $e
+     */
     public function testAdmin(MvcEvent $e)
     {
         $controller = $e->getTarget();

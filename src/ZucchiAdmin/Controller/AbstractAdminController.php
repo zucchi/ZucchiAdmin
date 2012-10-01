@@ -8,7 +8,7 @@
  */
 namespace ZucchiAdmin\Controller;
 
-use Zucchi\Controller\AbstractController;
+use Zucchi\Controller\AbstractRestController;
 use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\View\Model\JsonModel;
 use Zend\Debug\Debug;
@@ -22,7 +22,7 @@ use Zend\Debug\Debug;
  * @subpackage Controller
  * @category Components
  */
-class AbstractAdminController extends AbstractController
+class AbstractAdminController extends AbstractRestController
 {
 
     /**
@@ -66,7 +66,9 @@ class AbstractAdminController extends AbstractController
         $service = $this->getServiceLocator()->get($this->service);
         
         $entity = $service->get($id);
-        
+        if (!$entity) {
+            throw new \RuntimeException('Entity Not found');
+        }
         $model =  new JsonModel($entity->toArray());
         
         return $model;

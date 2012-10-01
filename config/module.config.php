@@ -8,13 +8,21 @@ return array(
     'navigation' => array(
         'ZucchiAdmin' => array(
             'dashoard' => array(
-                'label' => 'Dashboard',
+                'label' => _('Dashboard'),
                 'route' => 'ZucchiAdmin',
+            ),
+            'settings' => array(
+                'label' => _('Settings'),
+                'route' => 'ZucchiAdmin',
+                'class' => 'pull-right',
             ),
         )
     ),
     'service_manager' => array(
-       'factories' => array(
+        'invokables' => array(
+            'zucchiadmin.listener' => 'ZucchiAdmin\Event\AdminListener',
+        ),
+        'factories' => array(
            'zucchiadmin.navigation' => '\ZucchiAdmin\Navigation\Service\AdminNavigationFactory',
        ),
     ),
@@ -31,6 +39,11 @@ return array(
                 ),
                 'priority' => 999999, // high priority to enforce admin urls not easily over-ridden
                 'may_terminate' => true,
+                'child_routes' => array(
+                    'query' => array(
+                        'type' => 'Query'
+                    )
+                )
             ),
         ),
     ),
@@ -61,4 +74,41 @@ return array(
             'crudbulkactions' => 'ZucchiAdmin\Crud\View\Helper\BulkActions',
         ),
     ),
+    'ZucchiSecurity' => array(
+        'permissions' => array(
+            'roles' => array(
+                'admin' => array(
+                    'label' => 'Administrator (basic admin access)',
+                    'parents'=>array('guest')
+                ),
+                'developer' => array(
+                    'label' => 'Developer (unrestricted access to all areas)',
+                ),
+            ),
+            'privileges' => array(
+                'ZucchiAdmin' => array(
+                    'view', 'create', 'read', 'update', 'delete', 'export'
+                ),
+            ),
+            'resources' => array(
+                'route' =>array(
+                    'ZucchiAdmin' => array(),
+                ),
+            ),
+            'rules' => array(
+                array(
+                    'role' => 'admin',
+                    'resource' => array(
+                        'route:ZucchiAdmin',
+                    ),
+                    'privileges' => array(
+                        'view',
+                    ),
+                ),
+                array(
+                    'role' => 'developer',
+                )
+            )
+        ),
+    )
 );

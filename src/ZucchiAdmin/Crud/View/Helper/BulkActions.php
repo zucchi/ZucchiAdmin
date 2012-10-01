@@ -41,7 +41,7 @@ class BulkActions extends AbstractTranslatorHelper
      * @param bool $escape
      * @return string
      */
-    public function __invoke($actions = null)
+    public function __invoke($resource, $actions = null)
     {
         if (!$actions) {
             $actions = $this->defaultActions;
@@ -54,7 +54,9 @@ class BulkActions extends AbstractTranslatorHelper
                 <option>Select an action</option>';
         
         foreach ($actions as $action => $label) {
-            $html .= '<option value="' . $action . '">' . $label . '</option>';
+            if ($this->getView()->can($action, $resource)) {
+                $html .= '<option value="' . $action . '">' . $label . '</option>';
+            }
         }
         
         $html .= '

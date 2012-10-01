@@ -30,14 +30,13 @@ use Zucchi\Debug\Debug;
 class Module implements 
     AutoloaderProviderInterface,
     ConfigProviderInterface,
-    ServiceProviderInterface,
     BootstrapListenerInterface
 {
     
     public function onBootstrap(EventInterface $e)
     {
         $app = $e->getApplication();
-        $events = $app->getEventManager()->getSharedManager();
+        $events = $app->getEventManager();
         $sm = $app->getServiceManager();
         // replace direct instatiation with $sm to get listened already populated with view and db service 
         $layoutListener = $sm->get('zucchiadmin.listener');
@@ -68,23 +67,6 @@ class Module implements
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \Zend\ModuleManager\Feature\ServiceProviderInterface::getServiceConfig()
-     */
-    public function getServiceConfig()
-    {
-        return array(
-            'factories' => array(
-                'zucchiadmin.listener' => function($sm) {
-                    $config = $sm->get('config');
-                    $listener = new AdminListener();
-                    return $listener;
-                },
-            ),
-        );
     }
     
 }

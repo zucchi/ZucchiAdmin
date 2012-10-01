@@ -10,7 +10,7 @@ namespace ZucchiAdmin\Crud;
 
 use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\Form\Fieldset;
-use Zend\Debug\Debug;
+use Zucchi\Debug\Debug;
 
 /**
  * Trait to facilitate default CRUD implementation
@@ -74,6 +74,9 @@ trait ControllerTrait
         
         $builder = new AnnotationBuilder();
         $form = $builder->createForm($entity);
+        
+        $this->getEventManager()->trigger('crud.create.form', $form);
+        
         $form->bind($entity);
 
         if ($this->request->isPost()) {
@@ -122,6 +125,9 @@ trait ControllerTrait
         
         $builder = new AnnotationBuilder();
         $form = $builder->createForm($entity);
+        
+        $this->getEventManager()->trigger('crud.update.form', $form);
+        
         $form->bind($entity);
 
         if ($this->request->isPost()) {

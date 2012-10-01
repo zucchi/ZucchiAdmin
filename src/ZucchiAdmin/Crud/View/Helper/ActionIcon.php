@@ -32,9 +32,13 @@ class ActionIcon extends AbstractTranslatorHelper
      * @param int $icon
      * @return string
      */
-    public function __invoke($action, $icon, AbstractEntity $entity = null)
+    public function __invoke($action, $resource, $icon, AbstractEntity $entity = null)
     {
         $action = mb_strtolower($action);
+        
+        if (!$this->getView()->can($action, $resource)) {
+            return null;
+        }
         
         $url = $this->getView()->url(null, array('action' => $action));
         
