@@ -24,4 +24,9 @@ class DashboardController extends AbstractAdminController
     {
         
     }
+    
+    public function settingsAction()
+    {
+        
+    } 
 }

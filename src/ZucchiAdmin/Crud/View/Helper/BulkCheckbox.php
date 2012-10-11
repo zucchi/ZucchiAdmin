@@ -32,15 +32,19 @@ class BulkCheckbox extends AbstractTranslatorHelper
      * @param bool $escape
      * @return string
      */
-    public function __invoke(AbstractEntity $entity)
+    public function __invoke($id)
     {
         $html = '';
-        if (isset($entity->id)) {
+        if ($id instanceof AbstractEntity) {
+            $id = $id->id;
+        }
+        
+        if ($id) {
             $html = '
             <input class="pull-right bulk-action" 
                    type="checkbox" 
-                   id="bulk-action-' . $entity->id . '" 
-                   value="' . $entity->id . '" />';
+                   id="bulk-action-' . $id . '" 
+                   value="' . $id . '" />';
         }
         
         return $html;

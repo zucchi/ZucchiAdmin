@@ -12,6 +12,10 @@ use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\Form\Fieldset;
 use Zucchi\Debug\Debug;
 
+use ZucchiAdmin\Crud\Event\CrudEvent;
+
+use ZucchiDoctrine\Hydrator\DoctrineEntity as DoctrineHydrator;
+
 /**
  * Trait to facilitate default CRUD implementation
  * 
@@ -33,15 +37,19 @@ trait ControllerTrait
         if (!$this->service) {
             throw new \RuntimeException('No CRUD service defined');
         }
-        
-        $label = (isset($this->label)) ? $this->label : ''; 
+
+        $label = (isset($this->label)) ? $this->label : '';
         
         $service = $this->getServiceLocator()->get($this->service);
-        
+
+        $this->trigger(CrudEvent::EVENT_LIST_PRE);
+
         $where = $this->parseWhere();
         $order = $this->params()->fromQuery('order', array());
         
         $list = $service->getList($where, $order);
+
+        $this->trigger(CrudEvent::EVENT_LIST_POST, $list);
         
         return $this->loadView(
             'zucchi-admin/crud/list', 
@@ -52,7 +60,7 @@ trait ControllerTrait
                 'where' => $where,
                 'order' => $order,
                 'label' => $label,
-            
+
             )
         );
     }
@@ -65,13 +73,15 @@ trait ControllerTrait
         if (!$this->service) {
             throw new \RuntimeException('No CRUD service defined');
         }
-        
-        $label = (isset($this->label)) ? $this->label : ''; 
+
+        $label = (isset($this->label)) ? $this->label : '';
         
         $service = $this->getServiceLocator()->get($this->service);
-        
+
+        $this->trigger(CrudEvent::EVENT_CREATE_PRE);
+
         $entity = $service->getEntity();
-        
+
         $builder = new AnnotationBuilder();
         $form = $builder->createForm($entity);
         
@@ -88,13 +98,16 @@ trait ControllerTrait
                     'status'      => 'success',
                     'title'       => 'Saved',
                     'dismissable' => true
-               ));
+                 ));
+
+                 $this->trigger(CrudEvent::EVENT_CREATE_POST, $form);
+
                  $this->redirect()->toRoute(null, array('action'=>'list'));
              }
          }
         
         $this->addFormActions($form);
-        
+
         return $this->loadView(
             'zucchi-admin/crud/create',
             array(
@@ -116,16 +129,22 @@ trait ControllerTrait
         if (!$id = $this->params()->fromQuery('id', false)) {
             throw new \RuntimeException('you must specifiy the id you wish to update');
         }
-        
-        $label = (isset($this->label)) ? $this->label : ''; 
+
+        $label = (isset($this->label)) ? $this->label : '';
         
         $service = $this->getServiceLocator()->get($this->service);
+
+        $this->trigger(CrudEvent::EVENT_UPDATE_PRE);
         
         $entity = $service->get($id);
-        
+
         $builder = new AnnotationBuilder();
         $form = $builder->createForm($entity);
-        
+
+        $hydrator = new DoctrineHydrator($service->getEntityManager());
+        $form->setHydrator($hydrator);
+
+
         $this->getEventManager()->trigger('crud.update.form', $form);
         
         $form->bind($entity);
@@ -139,13 +158,15 @@ trait ControllerTrait
                     'status'      => 'success',
                     'title'       => 'Saved',
                     'dismissable' => true
-               ));
+                 ));
+                 $this->trigger(CrudEvent::EVENT_UPDATE_POST, $form);
+
                  $this->redirect()->toRoute(null, array('action'=>'list'));
              }
          }
         
         $this->addFormActions($form);
-        
+
         return $this->loadView(
             'zucchi-admin/crud/update',
             array(
@@ -163,25 +184,28 @@ trait ControllerTrait
         if (!$this->service) {
             throw new \RuntimeException('No CRUD service defined');
         }
-        
+
         $label = (isset($this->label)) ? $this->label : '';
         
         if ($this->params()->fromQuery('confirmed', false) == 'delete') {
             // if delete has been confirmed
             $service = $this->getServiceLocator()->get($this->service);
+
+            $this->trigger(CrudEvent::EVENT_DELETE_PRE, $service);
             
             $result = $service->remove($this->params()->fromQuery('id', null));
-            
+
             $this->flashMessenger()->addMessage(array(
-                    'message'     => sprintf('%1$s x %2$s sucessfully deleted', $result, $label),
+                    'message'     => sprintf('%1$s x %2$s successfully deleted', $result, $label),
                     'status'      => ($result) ? 'success' : 'warning',
                     'title'       => 'Deleted',
                     'dismissable' => true
-               ));
+            ));
+            $this->trigger(CrudEvent::EVENT_DELETE_POST, $result);
+
             $this->redirect()->toRoute(null, array('action'=>'list'));
         }
-        
-        
+
         return $this->loadView(
             'zucchi-admin/crud/delete',
             array(
@@ -193,6 +217,8 @@ trait ControllerTrait
     
     public function exportAction()
     {
+        $this->trigger(CrudEvent::EVENT_EXPORT_PRE);
+        $this->trigger(CrudEvent::EVENT_EXPORT_POST);
         return $this->loadView('zucchi-admin/crud/export');
     }
     
@@ -231,5 +257,20 @@ trait ControllerTrait
         ));
         $form->add($actions);
         return $form;
+    }
+
+    public function trigger($name, $target = null)
+    {
+        $event = new CrudEvent();
+        $event->setRequest($this->getRequest())
+            ->setResponse($this->getResponse())
+            ->setServiceManager($this->getServiceLocator());
+
+        if ($target) {
+            $event->setTarget($target);
+        }
+
+        $eventManager = $this->getEventManager();
+        $eventManager->trigger($name, $event);
     }
 }

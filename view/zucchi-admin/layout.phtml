@@ -10,8 +10,33 @@
                             ->appendStylesheet($this->basePath() . '/_css/zucchi/admin/jquery-ui-1.8.23.custom.css') ?>
         <?=$this->headScript()->appendFile($this->basePath() . '/_js/zucchi/admin/modernizr.min.js')
                               ->appendFile($this->basePath() . '/_js/zucchi/admin/jquery-1.8.0.min.js')
-                              ->appendFile($this->basePath() . '/_js/zucchi/admin/jquery-ui-1.8.23.custom.min.js') 
+                              ->appendFile($this->basePath() . '/_js/zucchi/admin/jquery-ui-1.8.23.custom.min.js')
+                              ->appendFile($this->basePath() . '/_js/zucchi/admin/jquery-ui-timepicker-addon.js')
                               ->appendFile($this->basePath() . '/_js/zucchi/bootstrap/bootstrap.min.js') ?>
+        <?php
+        $this->inlineScript()->appendScript('
+            (function($j) {
+                $j(document).ready(function(){
+                    if (!Modernizr.inputtypes.date) {
+                        $j("form").on("load focus change", "input[type=datet]", function(e){
+                            $j( "input[type=date]" ).datepicker({
+                                dateFormat: "yy-mm-dd",
+                                timeFormat: "h:m t",
+                            });
+                        });
+                    }
+                    if (!Modernizr.inputtypes.datetime) {
+                        $j("form").on("load focus change", "input[type=datetime]", function(e){
+                            $j(this).datetimepicker({
+                                dateFormat: "yy-mm-dd",
+                                timeFormat: "hh:mm:ss",
+                            });
+                        });
+                    }
+                })
+            })(jQuery);
+        ');
+        ?>
     </head>
     <body>
         <div class="navbar navbar-inverse">

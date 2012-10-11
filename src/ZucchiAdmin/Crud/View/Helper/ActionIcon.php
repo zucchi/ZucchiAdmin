@@ -32,7 +32,7 @@ class ActionIcon extends AbstractTranslatorHelper
      * @param int $icon
      * @return string
      */
-    public function __invoke($action, $resource, $icon, AbstractEntity $entity = null)
+    public function __invoke($action, $resource, $icon, $id = null)
     {
         $action = mb_strtolower($action);
         
@@ -42,8 +42,10 @@ class ActionIcon extends AbstractTranslatorHelper
         
         $url = $this->getView()->url(null, array('action' => $action));
         
-        if ($entity) {
-            $url .= '?id=' . $entity->id;
+        if ($id instanceof AbstractEntity) {
+            $url .= '?id=' . $id->id;
+        } else if ($id) {
+            $url .= '?id=' . $id;
         }
         
         $html = '
