@@ -44,7 +44,7 @@ trait ControllerTrait
 
         $this->trigger(CrudEvent::EVENT_LIST_PRE);
 
-        $where = $this->parseWhere();
+        $where = $this->parseWhere($this->getRequest());
         $order = $this->params()->fromQuery('order', array());
         
         $list = $service->getList($where, $order);
@@ -255,7 +255,7 @@ trait ControllerTrait
                 ),
             ),
         ));
-        $form->add($actions);
+        $form->add($actions, array('priority' => -9999));
         return $form;
     }
 
