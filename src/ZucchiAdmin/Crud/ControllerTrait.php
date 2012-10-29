@@ -10,7 +10,9 @@ namespace ZucchiAdmin\Crud;
 
 use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\Form\Fieldset;
+use Zend\Stdlib\Hydrator\Reflection as ReflectionHydrator;
 use Zucchi\Debug\Debug;
+use Zucchi\Form\Factory as FormFactory;
 
 use ZucchiAdmin\Crud\Event\CrudEvent;
 
@@ -83,6 +85,9 @@ trait ControllerTrait
         $entity = $service->getEntity();
 
         $builder = new AnnotationBuilder();
+        $formFactory = new FormFactory();
+        $formFactory->setServiceManager($this->getServiceLocator());
+        $builder->setFormFactory($formFactory);
         $form = $builder->createForm($entity);
         
         $this->getEventManager()->trigger('crud.create.form', $form);
@@ -138,15 +143,18 @@ trait ControllerTrait
         
         $entity = $service->get($id);
 
+        if (!$entity) {
+            throw new \RuntimeException('We could not find the item you want to update');
+        }
+
         $builder = new AnnotationBuilder();
+        $formFactory = new FormFactory();
+        $formFactory->setServiceManager($this->getServiceLocator());
+        $builder->setFormFactory($formFactory);
         $form = $builder->createForm($entity);
 
-        $hydrator = new DoctrineHydrator($service->getEntityManager());
-        $form->setHydrator($hydrator);
-
-
         $this->getEventManager()->trigger('crud.update.form', $form);
-        
+
         $form->bind($entity);
 
         if ($this->request->isPost()) {
