@@ -170,6 +170,13 @@ trait ControllerTrait
                  $this->trigger(CrudEvent::EVENT_UPDATE_POST, $form);
 
                  $this->redirect()->toRoute(null, array('action'=>'list'));
+             } else {
+                 $this->messenger()->addMessage(
+                     sprintf('Failed to save %1$s', $label),
+                     'error',
+                     'Failure',
+                     true
+                 );
              }
          }
         
