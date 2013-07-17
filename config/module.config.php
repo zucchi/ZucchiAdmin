@@ -40,9 +40,6 @@ return array(
                 'priority' => 999999, // high priority to enforce admin urls not easily over-ridden
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'query' => array(
-                        'type' => 'Query'
-                    ),
                     'Settings' => array(
                         'type'    => 'Segment',
                         'options' => array(
