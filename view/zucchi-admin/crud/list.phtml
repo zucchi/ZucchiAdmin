@@ -99,6 +99,7 @@
             </select>
             <button type="button" class="btn btn-info input-mini" id="filter-add">Add</button>
         </div>
+
     </div>
     <div class="row-fluid">
         <div class="span9">
@@ -136,8 +137,30 @@
                 <?php endif; ?>
             </table>
         </div>
-        <div class="span3 well">
-            <?=$this->crudBulkActions('module:ZucchiUser')?>
+        <div class="span3">
+            <div class="well">
+                <?=$this->crudBulkActions('module:ZucchiUser')?>
+            </div>
+            <?php if ($pages > 1): ?>
+            <div class="well pagination-container">
+                <div class="pagination">
+                    <ul>
+                        <li class="<?=($page == 1) ? 'disabled':null;?>"><a href="?page=1&<?=$currentQuery?>">&laquo;</a></li>
+                        <li class="<?=($page == 1) ? 'disabled':null;?>"><a href="?page=<?=($page>1)? $page-1:1?>&<?=$currentQuery?>">&lt;</a></li>
+                        <li class="disabled"><span><?=$page?> of <?=$pages?></span></li>
+                        <li class="<?=($page == $pages) ? 'disabled':null;?>"><a href="?page=<?=($page<$pages)? $page+1:$pages?>&<?=$currentQuery?>">&gt;</a></li>
+                        <li class="<?=($page == $pages) ? 'disabled':null;?>"><a href="?page=<?=$pages?>&<?=$currentQuery?>">&raquo;</a></li>
+                    </ul>
+                </div>
+                <form class="form-inline" method="get">
+                    <label>Jump to page:</label><input type="text" class="input-small" name="page" placeholder="page #" value="<?=$page?>"/>
+                    <?php foreach (explode('&', $currentQuery) as $part): ?>
+                        <?php list($key, $value) = explode('=',$part);?>
+                        <input type='hidden' name='<?=urldecode($key)?>' value='<?=$value?>'/>
+                    <?php endforeach;?>
+                </form>
+            </div>
+            <?php endif;?>
         </div>
     </div>
 </div>

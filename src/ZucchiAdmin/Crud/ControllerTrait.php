@@ -48,15 +48,28 @@ trait ControllerTrait
 
         $where = $this->parseWhere($this->getRequest());
         $order = $this->params()->fromQuery('order', array());
+
+        $perPage = $service::INDEX_LIMIT;
+
+        $page = ($this->params()->fromQuery('page', 1) -1) * $perPage;
         
-        $list = $service->getList($where, $order);
+        $list = $service->getList($where, $order, $page, $perPage);
+
+        $count = $service->getCount($where);
 
         $this->trigger(CrudEvent::EVENT_LIST_POST, $list);
-        
+
+        $currentQuery = $this->params()->fromQuery();
+        unset($currentQuery['page']);
+
         return $this->loadView(
             'zucchi-admin/crud/list', 
             array(
                 'list' => $list,
+                'count' => $count,
+                'page' => $page+1,
+                'currentQuery' => http_build_query($currentQuery),
+                'pages' => ceil($count/$perPage),
                 'listFields' => $this->listFields,
                 'metadata' => $service->getMetaData(),
                 'where' => $where,

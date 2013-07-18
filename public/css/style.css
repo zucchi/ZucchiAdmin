@@ -37,10 +37,19 @@ body {
     margin: 10px;
 }
 
+#admin th:hover {
+    background-color: #ff781e;
+}
+
 footer {
     margin-top: 3px;
 }
 
+
+.well.pagination-container {
+    padding: 0px;
+    text-align: center;
+}
 
 /* css for timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
