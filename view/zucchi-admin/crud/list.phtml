@@ -155,7 +155,7 @@
                 <form class="form-inline" method="get">
                     <label>Jump to page:</label><input type="text" class="input-small" name="page" placeholder="page #" value="<?=$page?>"/>
                     <?php foreach (explode('&', $currentQuery) as $part): ?>
-                        <?php list($key, $value) = explode('=',$part);?>
+                        <?php list($key, $value) = @explode('=',$part);?>
                         <input type='hidden' name='<?=urldecode($key)?>' value='<?=$value?>'/>
                     <?php endforeach;?>
                 </form>
