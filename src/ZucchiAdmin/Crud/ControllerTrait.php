@@ -51,9 +51,9 @@ trait ControllerTrait
 
         $perPage = $service::INDEX_LIMIT;
 
-        $page = ($this->params()->fromQuery('page', 1) -1) * $perPage;
+        $page = ($this->params()->fromQuery('page', 1) -1);
         
-        $list = $service->getList($where, $order, $page, $perPage);
+        $list = $service->getList($where, $order, ($page * $perPage), $perPage);
 
         $count = $service->getCount($where);
 
