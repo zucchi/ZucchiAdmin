@@ -115,7 +115,7 @@
                         <?php endforeach; ?>
                         <th>
                             <input class="pull-right" type="checkbox" id="bulk-all" />
-                            <?=$this->crudActionIcon('create', 'module:ZucchiUser', 'icon-plus')?>
+                            <?=$this->crudActionIcon('create', 'module:' . $module, 'icon-plus')?>
                         </th>
                     </tr>
                 </thead>
@@ -127,8 +127,8 @@
                         <?php endforeach; ?>
                         <td>
                             <?=$this->crudBulkCheckbox($item)?>
-                            <?=$this->crudActionIcon('delete', 'module:ZucchiUser', 'icon-remove', $item)?>
-                            <?=$this->crudActionIcon('update', 'module:ZucchiUser', 'icon-pencil', $item )?>
+                            <?=$this->crudActionIcon('delete', 'module:' . $module, 'icon-remove', $item)?>
+                            <?=$this->crudActionIcon('update', 'module:' . $module, 'icon-pencil', $item )?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -139,7 +139,7 @@
         </div>
         <div class="span3">
             <div class="well">
-                <?=$this->crudBulkActions('module:ZucchiUser')?>
+                <?=$this->crudBulkActions('module:' . $module)?>
             </div>
             <?php if ($pages > 1): ?>
             <div class="well pagination-container">

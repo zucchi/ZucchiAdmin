@@ -65,6 +65,7 @@ trait ControllerTrait
         return $this->loadView(
             'zucchi-admin/crud/list', 
             array(
+                'module' => $this->module,
                 'list' => $list,
                 'count' => $count,
                 'page' => $page+1,
